@@ -1,11 +1,11 @@
-from turtle import width
 import numpy as np
 import random
 import tkinter.messagebox
 from tkinter import *
 
 
-arr = np.arange(20)
+lenghtOfArray = 30 # define how long you want your array to be
+arr = np.arange(lenghtOfArray) # arr = np.arange(lenghtOfArray+1 if you want to include last number)
 n = len(arr)
 
 
@@ -26,29 +26,38 @@ def shuffler (arr, n):
     return arr
 
 
-#shuffledArray = shuffler(arr, n)
+shuffledArray = shuffler(arr, n) # first argument for array and second for array length
 
 win=tkinter.Tk()
 win.title("Shuffler")
 win.geometry("400x400")
 
 
-can=Canvas(win, width=3000, height=3000)
+can=Canvas(win, width=3000, height=3000) # canvas size
 
-#width of the collum
-width = 50
+
+l = len(shuffledArray)
+width = 50 #width of the collumn
 rectLastX = 0
-#usedNumbers = []
+usedNumbers = []
 # for every number in array make a rectangle the height of the number in the array * 10
-for i in (arr):
-    i = random.choice(arr)
-    #i.append(usedNumbers)
-        #if i not in usedNumbers:
+for i in range(1,l):
+    if len(shuffledArray) != 0:
+        indexInArray = random.randint(1, l-i)
+        case = shuffledArray[indexInArray]
+        #print(usedNumbers, shuffledArray)
 
-    if i !=0:
-        rectangle=can.create_rectangle(rectLastX+width, 0, rectLastX, i*10,fill='green')
-        rectLastX += width
-        can.create_text(rectLastX-width/2, i*10,text=i, fill="Black")
-        can.pack()
+        #check if the number is not already used in the graph        
+        if case not in usedNumbers:
+            if case !=0:
+                rectangle=can.create_rectangle(rectLastX+width, 0, rectLastX, case*10,fill='green')
+                rectLastX += width
+                can.create_text(rectLastX-width/2, case*10,text=case, fill="Black")
+                can.pack()
+        usedNumbers.append(shuffledArray[indexInArray])
+        shuffledArray = np.delete(shuffledArray, indexInArray)
+    else:
+        break
+    
 
 win.mainloop()
