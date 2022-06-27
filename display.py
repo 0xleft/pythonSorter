@@ -6,11 +6,14 @@ from tkinter import *
 import time
 import math
 
+
 lenghtOfArray = 31 # define how long you want your array to be
-startOfArray = 0
+startOfArray = 1
 arr = np.arange(startOfArray,lenghtOfArray,dtype=None) # arr = np.arange(lenghtOfArray+1 if you want to include last number)
 n = len(arr)
-print(arr)
+
+width = 50 #width of the collumn
+rectLastX = width # distance from left top edge
 
 # shuffle the numbers in the array
 # (i didnt want to used random.shuffle())
@@ -31,13 +34,19 @@ def shuffler (arr, n):
 
 shuffledArray = shuffler(arr, n) # first argument for array and second for array length
 
-win=tkinter.Tk()
-win.title("Shuffler")
-win.geometry("2000x1000")
+def create_animation_window():
+    win = tkinter.Tk()
+    win.title("Shuffled")
+    return win
+
+def create_animation_canvas(window):
+    canvas = tkinter.Canvas(window)
+    canvas.configure(bg="grey")
+    canvas.pack(fill="both", expand=True)
+    window.geometry("2000x1000")
+    return canvas
 
 
-can=Canvas(win, width=3000, height=3000) # canvas size
-can.configure(bg="Grey")
 
 
 # find the sum of the array (used it for debugging)
@@ -67,44 +76,66 @@ def findIndexByNumber(array, number):
     return(NumberIndex)
 
 
-def drawingGraph(arr):
+def drawingGraph(arr,canvas):
+    canvas.delete("all")
     rectangles = []
     width = 50 #width of the collumn
     rectLastX = width # distance from left top edge
+    
     # for every number in array make a rectangle the height of the number in the array * 10
     for i in range(n):
         case = arr[i]
     
         if case !=0: # zeroes will have a height of 0 so i dont want to display them
-            rectangle=can.create_rectangle(rectLastX+width, 0, rectLastX, case*10,fill='green')
+            rectangle=canvas.create_rectangle(rectLastX+width, 0, rectLastX, case*10,fill='green')
             
             rectLastX += width
-            can.create_text(rectLastX-width/2, case*10,text=case, fill="Black")
-            can.pack()
+            canvas.create_text(rectLastX-width/2, case*10,text=case, fill="Black")
+            canvas.pack()
     # can.create_text(300, 500,text=shuffledArray, fill="Black") <--- displays array on the canvas for troubleshooting
 
-def selectionSort(shuffledArray):
-    n=len(shuffledArray)
-    for i in range(n):
+def selectionSort(array,number):
+    #n=len(array)
+    #for i in range(n):
+    i = number
+    minNumber = minim(shuffledArray)+i
+    minNumberIndex = findIndexByNumber(array, minNumber)
 
-        minNumber = minim(shuffledArray)+i
-        minNumberIndex = findIndexByNumber(shuffledArray, minNumber)
+    #minNumberIndex = np.where(shuffledArray == minNumber) <- couldnt make this work (help needded)
+    
 
-        #minNumberIndex = np.where(shuffledArray == minNumber) <- couldnt make this work (help needded)
-        
+    print("switching index:", i, "with:", minNumber)
+    array[minNumberIndex],shuffledArray[i] = array[i],shuffledArray[minNumberIndex]
+    
+    #rectangle=can.create_rectangle(minNumberIndex * rectLastX+width+ rectLastX, 0, minNumberIndex * rectLastX+rectLastX, minNumber*10,fill='red')
+    #can.create_text(minNumberIndex * rectLastX-width/2+ rectLastX, minNumber*10,text=minNumberIndex, fill="Black")
+    #can.pack()
 
-        print("switching index:", i, "with:", minNumber)
-        shuffledArray[minNumberIndex],shuffledArray[i] = shuffledArray[i],shuffledArray[minNumberIndex]
-        print(shuffledArray)
-        
-        #rectangle=can.create_rectangle(minNumberIndex * rectLastX+width+ rectLastX, 0, minNumberIndex * rectLastX+rectLastX, minNumber*10,fill='red')
-        #can.create_text(minNumberIndex * rectLastX-width/2+ rectLastX, minNumber*10,text=minNumberIndex, fill="Black")
-        #can.pack()
+    
 
-        
+    #can.after(20, sortingAnimation)
+    return array
 
-        #can.after(20, sortingAnimation)
+animation_refresh_seconds = 0.4
+def animateSorting(window,canvas,array,sortedArray):
+    
+    #sorter = canvas.create_rectangle(0,width-20, 20,fill="red")
+    while True:
+        while not np.array_equal(array,sortedArray):
+            for i in range(n):
+                array = selectionSort(array, i)
+                #sortedBarrier = canvas.create_rectangle(rectLastX+width*i, 0, rectLastX*i, i*10,fill="black") <---- I want to implement a barrier between sorted and unsorted numbers
+                print(array)
+                print(sortedArray)
+                drawingGraph(array,canvas)
+                window.update()
+                time.sleep(animation_refresh_seconds)
 
-drawingGraph(shuffledArray)
-selectionSort(shuffledArray)
-win.mainloop()
+
+animation_window = create_animation_window()
+animation_canvas = create_animation_canvas(animation_window)
+animateSorting(animation_window,animation_canvas,shuffledArray,np.arange(startOfArray,lenghtOfArray,dtype=None))
+
+#drawingGraph(shuffledArray)
+#selectionSort(shuffledArray)
+#win.mainloop()
