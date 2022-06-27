@@ -5,7 +5,7 @@ Curently using tkinter GUI library (maybe switch later)
 Implement GUI
 Implement at least 4 sorting algorythms to sort the collums:
 
-Selection sort: https://www.geeksforgeeks.org/selection-sort/
+Selection sort: https://www.geeksforgeeks.org/selection-sort/ 
 
 Merge sort: https://www.geeksforgeeks.org/merge-sort/
 
