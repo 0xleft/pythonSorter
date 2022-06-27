@@ -34,30 +34,20 @@ win.geometry("400x400")
 
 
 can=Canvas(win, width=3000, height=3000) # canvas size
+can.configure(bg="Grey")
 
 
-l = len(shuffledArray)
 width = 50 #width of the collumn
 rectLastX = 0
-usedNumbers = []
 # for every number in array make a rectangle the height of the number in the array * 10
-for i in range(1,l):
-    if len(shuffledArray) != 0:
-        indexInArray = random.randint(1, l-i)
-        case = shuffledArray[indexInArray]
-        #print(usedNumbers, shuffledArray)
-
-        #check if the number is not already used in the graph        
-        if case not in usedNumbers:
-            if case !=0:
-                rectangle=can.create_rectangle(rectLastX+width, 0, rectLastX, case*10,fill='green')
-                rectLastX += width
-                can.create_text(rectLastX-width/2, case*10,text=case, fill="Black")
-                can.pack()
-        usedNumbers.append(shuffledArray[indexInArray])
-        shuffledArray = np.delete(shuffledArray, indexInArray)
-    else:
-        break
-    
+for i in range(n):
+    case = shuffledArray[i]
+   
+    if case !=0: # zeroes will have a height of 0 so i dont want to display them
+        rectangle=can.create_rectangle(rectLastX+width, 0, rectLastX, case*10,fill='green')
+        rectLastX += width
+        can.create_text(rectLastX-width/2, case*10,text=case, fill="Black")
+        can.pack()
+# can.create_text(300, 500,text=shuffledArray, fill="Black") <--- displays array on the canvas for trouble shooting     
 
 win.mainloop()
