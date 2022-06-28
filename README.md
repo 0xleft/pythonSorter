@@ -9,7 +9,7 @@ Selection sort: https://www.geeksforgeeks.org/selection-sort/      🟩
 
 Merge sort: https://www.geeksforgeeks.org/merge-sort/              🟥
 
-Quick sort: https://www.geeksforgeeks.org/quick-sort/              🟥
+Quick sort: https://www.geeksforgeeks.org/quick-sort/              🟩
 
 Bucket sort: https://www.geeksforgeeks.org/bucket-sort-2/          🟥
 
