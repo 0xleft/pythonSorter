@@ -7,7 +7,6 @@ import time
 import os
 
 
-
 def selectionSortForTest(array):
     for index in range(0,array.size):
         minNumber = array[index]
@@ -81,7 +80,17 @@ def minim(array):
         if(min > array[j] and array[j]): # leave out zeroes because we dont draw them
             min = array[j]
     return min
-    
+
+
+def getCurrentValue():
+    return round(currentValue.get())
+
+
+def sliderChanged(event):
+    global change
+    change = True
+    return change
+
 
 # find number by its index
 def findIndexByNumber(array, number):
@@ -106,18 +115,59 @@ def drawingGraph(array,canvas):
         canvas.pack()
 
 
-def getCurrentValue():
-    return round(currentValue.get())
+def partition(array, low, high):
+ 
+    # Choose the rightmost element as pivot
+    pivot = array[high]
 
+    # Pointer for greater element
+    i = low - 1
+    # Traverse through all elements
+    # compare each element with pivot
+    for j in range(low, high):
+        if array[j] <= pivot:
+            # If element smaller than pivot is found
+            # swap it with the greater element pointed by i
+            i = i + 1
 
-def sliderChanged(event):
-    global change
-    change = True
-    return change
-
+            # Swapping element at i with element at j
+            (array[i], array[j]) = (array[j], array[i])
+        # Swap the pivot element with the greater element specified by i
+    (array[i + 1], array[high]) = (array[high], array[i + 1])
+    drawingGraph(array,animation_canvas)
+    animation_window.update()
+    time.sleep(animation_refresh_seconds)
     
+    # Return the position from where partition is done
+    return i + 1
+
+ 
+# Function to perform quicksort
+def quickSort(array, low, high):
+    if low < high:
+ 
+        # Find pivot element such that
+        # element smaller than pivot are on the left
+        # element greater than pivot are on the right
+        pi = partition(array, low, high)
+
+        # Recursive call on the left of pivot
+        quickSort(array, low, pi - 1)
+
+        # Recursive call on the right of pivot
+        quickSort(array, pi + 1, high)
+        return array
+
+
+def animateQuickSort(window,canvas,array):
+    for j in range(array.size):
+        arraycopy = copy(array)
+        array = quickSort(array,0,len(array)-1)
+        if np.array_equal(array, arraycopy):
+            break
+
+
 def selectionSort(array,index):
-    #print(array, "selection sort array")
     #print(array, "selection sorter")
     minNumber = array[index]
     minIndex = index
@@ -163,13 +213,15 @@ def animateSelectionSort(window,canvas,array):
 def animateSorting(window,canvas):
     
 
-    selectionSort = tkinter.Button(canvas, text="Selection Sort", command=lambda: animateSelectionSort(window, canvas, generatedArray))
+    selectionSort = tkinter.Button(canvas, text="selection Sort", command=lambda: animateSelectionSort(window, canvas, generatedArray))
     bubbleSort = tkinter.Button(canvas, text="buble sort", command=lambda: animateBubbleSort(window, canvas, generatedArray)) #using lambda allows to pass arguments to function
+    quickSort = tkinter.Button(canvas, text="quick sort", command=lambda: animateQuickSort(window, canvas, generatedArray))
 
     selectionSort.pack()
     bubbleSort.pack()
+    quickSort.pack()
 
-    slider = tkinter.Scale(canvas,from_=5,to=40,orient='horizontal',command=sliderChanged, variable=currentValue)
+    slider = tkinter.Scale(canvas,from_=20,to=40,orient='horizontal',command=sliderChanged, variable=currentValue)
     slider.pack()
     generatedArray = np.array([])
     generatedArray = generateNewArray()
@@ -179,9 +231,7 @@ def animateSorting(window,canvas):
             generatedArray = generateNewArray()
             drawingGraph(generatedArray,canvas)
             change = False
-
         window.update()
-
 
 
 animation_refresh_seconds = 0.05
