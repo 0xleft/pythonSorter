@@ -70,8 +70,7 @@ def flipbool(bool):
 #generate new array in the same array
 def generateNewArray():
     generatedArray = ([])
-    generatedArray = np.random.randint(1, 200, size = getCurrentValue()+5)
-    print(generatedArray, "generator array")
+    generatedArray = np.random.randint(1, 200, size = getCurrentValue())
     return generatedArray
 
 
@@ -98,7 +97,7 @@ def findIndexByNumber(array, number):
 def drawingGraph(array,canvas):
     width = 50 #width of the collumn
     rectLastX = 50 # distance from left top edge
-    print(array, "drawing graph array")
+    #print(array, "drawing graph array")
     canvas.delete("all")
     # for every number in array make a rectangle the height of the number in the array * 10
     for i in range(array.size):
@@ -115,10 +114,12 @@ def getCurrentValue():
 
 
 def sliderChanged(event):
-    print(getCurrentValue())
+    global change
+    change = True
+    return change
     
 def selectionSort(array,index):
-    print(array, "selection sort array")
+    #print(array, "selection sort array")
     #print(array, "selection sorter")
     minNumber = array[index]
     minIndex = index
@@ -164,19 +165,21 @@ def animateSelectionSort(window,canvas,array):
 def animateSorting(window,canvas):
     selectionSort = tkinter.Button(canvas, text="Selection Sort", command=lambda: animateSelectionSort(window, canvas, generatedArray))
     bubbleSort = tkinter.Button(canvas, text="buble sort", command=lambda: animateBubbleSort(window, canvas, generatedArray)) #using lambda allows to pass arguments to function
-    newGraph = tkinter.Button(canvas, text="new graph", command=lambda: drawingGraph(generatedArray, canvas))
 
     selectionSort.pack()
-    newGraph.pack()
     bubbleSort.pack()
 
-    slider = tkinter.Scale(canvas,from_=10,to=100,orient='horizontal',command=sliderChanged, variable=currentValue)
+    slider = tkinter.Scale(canvas,from_=5,to=40,orient='horizontal',command=sliderChanged, variable=currentValue)
     slider.pack()
+    generatedArray = np.array([])
+    generatedArray = generateNewArray()
+    global change
     while True:
-        i = getCurrentValue()
-        if getCurrentValue != i:
+        if change == True:
+            print("yes")
             generatedArray = generateNewArray()
             drawingGraph(generatedArray,canvas)
+            change = False
 
         window.update()
 
@@ -194,6 +197,5 @@ animation_refresh_seconds = 0.05
 animation_window = create_animation_window()
 animation_canvas = create_animation_canvas(animation_window)
 currentValue = tkinter.DoubleVar()
-generatedArray = np.array([])
-generatedArray = generateNewArray()
+change = False
 animateSorting(animation_window,animation_canvas)
