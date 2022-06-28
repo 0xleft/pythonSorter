@@ -13,6 +13,8 @@ Quick sort: https://www.geeksforgeeks.org/quick-sort/              🟥
 
 Bucket sort: https://www.geeksforgeeks.org/bucket-sort-2/          🟥
 
+Bubble sort: https://www.geeksforgeeks.org/bubble-sort/            🟩
+
 (Maybe more in the future :))
 
 
