@@ -6,16 +6,6 @@ Curently using tkinter library as GUI library
 This is a very nice program and you should definetely give it a go :)
 
 
-
-Present sorting algorithms:
-
-selection sort
-bubble sort
-quicksort
-shellsort
-heapsort
-gnomesort
-
 Curently this is the final version of it, make sure to try it out.
 # Final version
 ![image](https://user-images.githubusercontent.com/107749872/176936318-8a586f29-962a-4598-86c2-d15c6ca4e901.png)
@@ -37,6 +27,20 @@ Bubble sort: https://www.geeksforgeeks.org/bubble-sort/                  🟩
 
 Colored graph         🟩
 
+
+# Present sorting algorithms:
+
+selection sort
+
+bubble sort
+
+quicksort
+
+shellsort
+
+heapsort
+
+gnomesort
 
 # Known Issues (need help)
 
