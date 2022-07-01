@@ -1,15 +1,29 @@
-# Python sorter
-``Generate an array display it and then use sorting algorythm to sort it
+# About
+This project code is very messy since its my first project but as Tom Scott: "Bodge things together to make it work and fix imediate problems"
 
-Curently using tkinter GUI library (maybe switch later)``
+Curently using tkinter library as GUI library
 
-# Progress
-![image](https://user-images.githubusercontent.com/107749872/176418039-7b18b462-9b2d-4667-9bc5-c027f4740aa3.png) *Latest*
+This is a very nice program and you should definetely give it a go :)
+
+
+
+Present sorting algorithms:
+
+selection sort
+bubble sort
+quicksort
+shellsort
+heapsort
+gnomesort
+
+Curently this is the final version of it, make sure to try it out.
+# Final version
+![image](https://user-images.githubusercontent.com/107749872/176936318-8a586f29-962a-4598-86c2-d15c6ca4e901.png)
 
 # Goals:
-Implement GUI                                                        🟨 
+Implement GUI                                                        🟩
 
-Implement at least 4 sorting algorythms to sort the collums: ``3/4`` 🟨
+Implement at least 4 sorting algorythms to sort the columns:         🟩🟩🟩
 
 Selection sort: https://www.geeksforgeeks.org/selection-sort/            🟩
 
@@ -23,11 +37,11 @@ Bubble sort: https://www.geeksforgeeks.org/bubble-sort/                  🟩
 
 Colored graph         🟩
 
-Implement multitreading
-
-![image](https://user-images.githubusercontent.com/107749872/176419643-305479e3-2c23-4e09-a5f7-e8ba1abd670e.png)
-
 
 # Known Issues (need help)
 
-``if 0 is a part of array it doesnt work``
+when using array size slider it will stop for a few seconds
+
+# Suggestions
+
+If you have any suggestions make a issue or better a pull request ill make sure to look at it
