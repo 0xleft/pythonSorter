@@ -1,0 +1,8 @@
+Selection sort works by taking the smallest element in an unsorted array and bringing it to the front. You'll go through each item (from left to right) until you find the smallest one. The first item in the array is now sorted, while the rest of the array is unsorted, so you repeat.
+Bubble sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in the wrong order. This algorithm is not suitable for large data sets as its average and worst case time complexity is quite high.
+Quicksort is one of the most efficient sorting algorithms. It works by breaking an array (partition) into smaller ones and swapping (exchanging) the smaller ones, depending on a comparison with the 'pivot' element picked.
+Shell sort is a generalized version of the insertion sort algorithm. It first sorts elements that are far apart from each other and successively reduces the interval between the elements to be sorted. The interval between the elements is reduced based on the sequence used.
+Heap sort is a comparison-based sorting technique based on Binary Heap data structure. It is similar to selection sort where we first find the minimum element and place the minimum element at the beginning. We repeat the same process for the remaining elements.
+Gnome Sort is a poor-performing algorithm, but one whose value lies in teaching, not in performance: it is a good example of what not to do.
+Array size - how many bars you will have on the graph (too many will lag)
+Width of the bars in the graph, the thinier the bars are the more can fit on the graph.
