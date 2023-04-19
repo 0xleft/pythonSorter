@@ -1,3 +1,5 @@
+Disclaimer: this is my first coding project therefore code is extremely messy.
+
 # About
 This project code is very messy since its my first project but as Tom Scott: "Bodge things together to make it work and fix imediate problems"
 
